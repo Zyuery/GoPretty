@@ -1,21 +1,25 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-// fibonacci 是返回一个「返回一个 int 的函数」的函数
-func fibonacci() func() int {
-	pre := 0
-	end := 1
-	return func() int {
-		result := pre
-		pre, end = end, pre+end
-		return result
-	}
+type Vertex struct {
+	X, Y float64
+}
+
+// Abs 函数————无接收者
+func Abs(v Vertex) float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
+}
+
+// Abs 方法————有接收者
+func (v Vertex) Abs() float64 {
+	return math.Sqrt(v.X*v.X + v.Y*v.Y)
 }
 
 func main() {
-	f := fibonacci()
-	for i := 0; i < 10; i++ {
-		fmt.Println(f())
-	}
+	v := Vertex{3, 4}
+	fmt.Println(Abs(v))
 }
